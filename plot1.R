@@ -15,13 +15,13 @@ nei <- readRDS('summarySCC_PM25.rds')
 scc <- readRDS('Source_Classification_Code.rds')
 
 # Getting the total emissions for each year
-emissionsByYear <- tapply(nei$Emissions, nei$year, sum)
+emissionsByYear <- with(nei, (tapply(Emissions, year, sum)))
 
 # This is easily represented using a bar plot.
 png(filename = 'Plot1.png')
 
 barplot(emissionsByYear,
-        main = 'Total Emissions By Year',
+        main = 'Total PM2.5 Emissions By Year',
         xlab = 'Year',
         ylab = 'Total PM2.5 (tons)')
 
