@@ -21,7 +21,7 @@ emissionsByYear <- with(nei, tapply(Emissions, year, sum))
 png(filename = 'Plot1.png')
 
 barplot(emissionsByYear,
-        main = 'Total PM2.5 Emissions By Year',
+        main = 'Total PM2.5 Emissions by Year',
         xlab = 'Year',
         ylab = 'Total PM2.5 (tons)')
 
