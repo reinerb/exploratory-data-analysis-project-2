@@ -1,3 +1,6 @@
+library(ggplot2)
+library(dplyr)
+
 # Download and extract files, if needed.
 if(!file.exists('pmdata.zip')){
     download.file('https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2FNEI_data.zip', 
@@ -14,17 +17,15 @@ if(!file.exists('Source_Classification_Code.rds') |
 nei <- readRDS('summarySCC_PM25.rds')
 scc <- readRDS('Source_Classification_Code.rds')
 
-# Get only rows for Baltimore
-baltimore <- subset(nei, fips == '24510')
+# Identify what codes indicate coal combustion, and pull relevant rows.
+coalCombustion <- subset(scc$SCC, grepl('[Cc]omb.*Coal', scc$EI.Sector))
+coalData <- subset(nei, nei$SCC %in% coalCombustion)
+coalTotals <- with(coalData, tapply(Emissions, year, sum))
 
-# Getting the total emissions for each year
-emissionsByYear <- with(baltimore, tapply(Emissions, year, sum))
+png(filename = 'Plot4.png')
 
-# This is easily represented using a bar plot.
-png(filename = 'Plot2.png')
-
-barplot(emissionsByYear,
-        main = 'Total PM2.5 Emissions in Baltimore by Year',
+barplot(coalTotals,
+        main = 'Total PM2.5 Emissions from Coal Combustion by Year',
         xlab = 'Year',
         ylab = 'Total PM2.5 (tons)')
 
