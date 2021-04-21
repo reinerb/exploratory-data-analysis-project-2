@@ -1,5 +1,4 @@
 library(ggplot2)
-library(RcolorBrewer)
 
 # Download and extract files, if needed.
 if(!file.exists('pmdata.zip')){
@@ -17,13 +16,17 @@ if(!file.exists('Source_Classification_Code.rds') |
 nei <- readRDS('summarySCC_PM25.rds')
 scc <- readRDS('Source_Classification_Code.rds')
 
-groupedData <- aggregate(Emissions ~ type + year, data = nei, FUN = sum)
+# Get only rows for Baltimore
+baltimore <- subset(nei, fips == '24510')
+
+groupedData <- aggregate(Emissions ~ type + year, data = baltimore, FUN = sum)
 
 neiPlot <- ggplot(groupedData) +
-    geom_bar(aes(year, Emissions, fill = type), stat = 'Identity') +
+    geom_bar(aes(factor(year), Emissions, fill = type), stat = 'Identity') +
     facet_grid(. ~ type) +
-    labs(title = 'Total Emissions By Source',
+    labs(title = 'Total Emissions By Source in Baltimore',
          x = 'Year',
-         y = 'Total PM2.5 (tons)')
+         y = 'Total PM2.5 (tons)') +
+    theme(legend.position = 'bottom')
 
 ggsave('Plot3.png', plot = neiPlot)
