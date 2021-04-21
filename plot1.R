@@ -18,7 +18,7 @@ scc <- readRDS('Source_Classification_Code.rds')
 emissionsByYear <- with(nei, tapply(Emissions, year, sum))
 
 # This is easily represented using a bar plot.
-png(filename = 'Plot1.png')
+png(filename = 'plot1.png')
 
 barplot(emissionsByYear,
         main = 'Total PM2.5 Emissions by Year',

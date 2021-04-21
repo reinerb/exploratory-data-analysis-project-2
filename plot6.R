@@ -25,7 +25,7 @@ baltimoreTotals <- with(baltimore, tapply(Emissions, year, sum))
 losangeles <- subset(vehicles, fips == '06037')
 laTotals <- with(losangeles, tapply(Emissions, year, sum))
 
-png(filename = 'Plot6.png')
+png(filename = 'plot6.png')
 
 par(mfrow=c(1,2))
 

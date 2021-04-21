@@ -22,7 +22,7 @@ baltimore <- subset(nei, fips == '24510')
 vehicles <- subset(baltimore, type = 'ON-ROAD')
 vehicleTotals <- with(vehicles, tapply(Emissions, year, sum))
 
-png(filename = 'Plot5.png')
+png(filename = 'plot5.png')
 
 barplot(vehicleTotals,
         main = 'Total PM2.5 Emissions by Baltimore Motor Vehicles',

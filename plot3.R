@@ -29,4 +29,4 @@ neiPlot <- ggplot(groupedData) +
          y = 'Total PM2.5 (tons)') +
     theme(legend.position = 'bottom')
 
-ggsave('Plot3.png', plot = neiPlot)
+ggsave('plot3.png', plot = neiPlot)

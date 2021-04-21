@@ -1,5 +1,4 @@
 library(ggplot2)
-library(dplyr)
 
 # Download and extract files, if needed.
 if(!file.exists('pmdata.zip')){
@@ -22,7 +21,7 @@ coalCombustion <- subset(scc$SCC, grepl('[Cc]omb.*Coal', scc$EI.Sector))
 coalData <- subset(nei, nei$SCC %in% coalCombustion)
 coalTotals <- with(coalData, tapply(Emissions, year, sum))
 
-png(filename = 'Plot4.png')
+png(filename = 'plot4.png')
 
 barplot(coalTotals,
         main = 'Total PM2.5 Emissions from Coal Combustion by Year',

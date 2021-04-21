@@ -21,7 +21,7 @@ baltimore <- subset(nei, fips == '24510')
 emissionsByYear <- with(baltimore, tapply(Emissions, year, sum))
 
 # This is easily represented using a bar plot.
-png(filename = 'Plot2.png')
+png(filename = 'plot2.png')
 
 barplot(emissionsByYear,
         main = 'Total PM2.5 Emissions in Baltimore by Year',
